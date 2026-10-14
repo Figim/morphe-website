@@ -292,9 +292,10 @@
     "patches-desc": "由社区维护的补丁包，由最终用户构建和支持。"
   },
   "add-source": {
-    "title": "添加补丁源",
     "subtitle": "是否要将此补丁源添加到 Morphe？",
     "source-label": "来源",
+    "app-label": "应用",
+    "only-app": "只添加此应用。你可以从来源的应用列表中添加其他应用",
     "warning": "仅添加来自你信任作者的来源。补丁源可能会修改你的应用",
     "open-btn": "在 Morphe 中打开",
     "back-home": "返回主页",

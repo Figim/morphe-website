@@ -25,10 +25,18 @@
 
     var blocklistPromise = fetchBlocklist();
 
+    // Host marks cut into the avatar's corner, from the Simple Icons set
+    var GITHUB_MARK = '<svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.1.8.9 1.3 1.9 1.3 3.1 0 4.7-2.8 5.7-5.5 6 .5.4.9 1.1.9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>';
+    var GITLAB_MARK = '<svg viewBox="0 0 24 24"><path d="m23.6 9.6-.03-.09-3.26-8.5a.85.85 0 0 0-1.62.06l-2.2 6.74H7.5L5.3 1.07a.85.85 0 0 0-1.62-.06L.43 9.5l-.03.09a6.06 6.06 0 0 0 2 7l.02.01.03.02 4.98 3.73 2.46 1.86 1.5 1.13a1 1 0 0 0 1.22 0l1.5-1.13 2.46-1.86 5-3.75.02-.01a6.06 6.06 0 0 0 2-7"/></svg>';
+
     var params    = new URLSearchParams(window.location.search);
     var githubRepo = params.get('github') || '';
     var gitlabRepo = params.get('gitlab') || '';
     var name       = params.get('name') || '';
+    // App the link was opened for, by package and by name. Manager adds the source for it alone
+    var appPackage = params.get('app') || '';
+    var appName    = params.get('appName') || '';
+    var appIcon    = params.get('appIcon') || '';
 
     var isGitLab = !!gitlabRepo;
     var repo     = gitlabRepo || githubRepo;
@@ -91,18 +99,56 @@
         document.body.classList.add('is-mobile-detected');
     }
 
-    // Populate source info card
+    // Header and rows the way Manager shows them: the repository as the title, its owner under it
     var match = url.match(/(?:github|gitlab)\.com\/([^/?#]+\/[^/?#]+)/);
-    var urlEl = document.getElementById('source-url');
-    if (urlEl) urlEl.textContent = url;
+    var repoPath = match ? match[1] : repo;
+    var host = isGitLab ? 'gitlab.com' : 'github.com';
+    document.getElementById('source-name').textContent = name || repoPath.split('/')[1] || repoPath;
+    document.getElementById('source-owner').textContent = host + '/' + repoOwner;
+    document.getElementById('source-host-mark').innerHTML = isGitLab ? GITLAB_MARK : GITHUB_MARK;
+
+    var blockedTitleEl = document.getElementById('blocked-source-title');
+    if (blockedTitleEl) blockedTitleEl.textContent = name || repoPath;
     var blockedUrlEl = document.getElementById('blocked-source-url');
-    if (blockedUrlEl) blockedUrlEl.textContent = url;
+    if (blockedUrlEl) blockedUrlEl.textContent = url.replace(/^https?:\/\//, '');
+
+    if (appPackage) {
+        document.getElementById('app-name').textContent = appName || appPackage;
+        document.getElementById('app-section').hidden = false;
+        showAppIcon(appIcon);
+    }
+
+    // Only Play Store icons are shown, as the bundles site links them, so a crafted link cannot put
+    // a picture of its own on this page. The generic icon stays when the picture fails to load
+    function showAppIcon(iconUrl) {
+        var parsed;
+        try { parsed = new URL(iconUrl); } catch (e) { return; }
+        if (parsed.protocol !== 'https:' || parsed.hostname !== 'play-lh.googleusercontent.com') return;
+
+        var slot = document.getElementById('app-icon');
+        var fallback = slot.firstElementChild;
+        var img = document.createElement('img');
+        img.alt = '';
+        img.hidden = true;
+        img.addEventListener('load', function () {
+            fallback.remove();
+            img.hidden = false;
+        }, { once: true });
+        img.addEventListener('error', function () { img.remove(); }, { once: true });
+        img.src = parsed.href;
+        slot.appendChild(img);
+    }
 
     // Explicit-package intent launches Manager regardless of App Link status.
     var encodedRepo  = encodeURIComponent(repo);
     var encodedName  = name ? encodeURIComponent(name) : '';
+    var encodedApp   = appPackage ? encodeURIComponent(appPackage) : '';
+    var encodedAppName = appPackage && appName ? encodeURIComponent(appName) : '';
     var repoParam    = isGitLab ? 'gitlab' : 'github';
-    var intentParams = repoParam + '=' + encodedRepo + (encodedName ? '&name=' + encodedName : '');
+    var intentParams = repoParam + '=' + encodedRepo +
+        (encodedName ? '&name=' + encodedName : '') +
+        (encodedApp ? '&app=' + encodedApp : '') +
+        (encodedAppName ? '&appName=' + encodedAppName : '');
     var intentLink   = 'intent://morphe.software/add-source?' + intentParams +
         '#Intent;scheme=https;package=app.morphe.manager;S.browser_fallback_url=' +
         encodeURIComponent('https://morphe.software/') + ';end';
@@ -161,13 +207,6 @@
 
     // Apply i18n once it's ready, then wait for the blocklist before showing the state.
     function applyI18nAndShow() {
-        if (window.i18n) {
-            // Re-apply translations that need dynamic content
-            // (static data-i18n attrs are handled by i18n.js automatically)
-            document.getElementById('source-label').textContent =
-                window.i18n.t('add-source.source-label');
-        }
-
         blocklistPromise.then(function (blocklist) {
             var entry = blocklist.entries.get(providerKey);
             renderState(!!entry, entry ? entry.reason : null, blocklist.updatedAt);

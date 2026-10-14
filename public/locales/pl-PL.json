@@ -287,9 +287,10 @@
     "view-patches": "Zobacz wydania modyfikacji"
   },
   "add-source": {
-    "title": "Dodaj źródło modyfikacji",
     "subtitle": "Czy chcesz dodać to źródło modyfikacji do Morphe?",
     "source-label": "Źródło",
+    "app-label": "Aplikacja",
+    "only-app": "Dodawana jest tylko ta aplikacja. Inne aplikacje możesz dodać z listy aplikacji źródła",
     "warning": "Dodawaj źródła tylko od zaufanych autorów. Mogą one ingerować w kod Twoich aplikacji",
     "open-btn": "Otwórz w Morphe",
     "back-home": "Wróć na stronę główną",

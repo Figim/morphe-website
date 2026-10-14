@@ -287,9 +287,10 @@
     "view-patches": "View Patches Releases"
   },
   "add-source": {
-    "title": "Add patch source",
     "subtitle": "Do you want to add this patch source to Morphe?",
     "source-label": "Source",
+    "app-label": "App",
+    "only-app": "Only this app is added. You can add other apps from the source's app list",
     "warning": "Only add sources from authors you trust. Patch sources can modify your apps",
     "open-btn": "Open in Morphe",
     "back-home": "Back to Homepage",

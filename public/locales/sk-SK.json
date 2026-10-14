@@ -292,9 +292,10 @@
     "patches-desc": "Balíky záplat udržiavané komunitou, vytvorené a podporované koncovými používateľmi."
   },
   "add-source": {
-    "title": "Pridať zdroj patchov",
     "subtitle": "Chcete pridať tento zdroj patchov do Morphe?",
     "source-label": "Zdroj",
+    "app-label": "Aplikácia",
+    "only-app": "Pridá sa iba táto aplikácia. Ďalšie aplikácie môžete pridať zo zoznamu aplikácií zdroja",
     "warning": "Pridávajte iba zdroje od autorov, ktorým dôverujete. Zdroje patchov môžu upravovať vaše aplikácie",
     "open-btn": "Otvoriť v Morphe",
     "back-home": "Späť na hlavnú stránku",

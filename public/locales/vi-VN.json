@@ -287,9 +287,10 @@
     "view-patches": "Xem bản phát hành bản vá"
   },
   "add-source": {
-    "title": "Thêm nguồn vá",
     "subtitle": "Bạn có muốn thêm nguồn vá này vào Morphe không?",
     "source-label": "Nguồn",
+    "app-label": "Ứng dụng",
+    "only-app": "Chỉ ứng dụng này được thêm. Bạn có thể thêm các ứng dụng khác từ danh sách ứng dụng của nguồn",
     "warning": "Chỉ thêm nguồn từ những tác giả bạn tin tưởng, vì nguồn vá có thể chỉnh sửa ứng dụng trên thiết bị của bạn",
     "open-btn": "Mở bằng Morphe",
     "back-home": "Về trang chủ",
