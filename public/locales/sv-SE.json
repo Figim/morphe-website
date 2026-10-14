@@ -287,9 +287,10 @@
     "view-patches": "Visa tilläggsversioner"
   },
   "add-source": {
-    "title": "Lägg till en tilläggskälla",
     "subtitle": "Vill du lägga till den här tilläggskällan i Morphe?",
     "source-label": "Källa",
+    "app-label": "App",
+    "only-app": "Endast den här appen läggs till. Du kan lägga till andra appar från källans applista",
     "warning": "Lägg bara till källor från utgivare du litar på. Tilläggskällor kan modifiera dina appar",
     "open-btn": "Öppna i Morphe",
     "back-home": "Tillbaka till startsidan",

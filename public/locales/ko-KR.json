@@ -287,9 +287,10 @@
     "view-patches": "패치 릴리스 보기"
   },
   "add-source": {
-    "title": "패치 소스 추가",
     "subtitle": "이 패치 소스를 Morphe에 추가할까요?",
     "source-label": "소스",
+    "app-label": "앱",
+    "only-app": "이 앱만 추가됩니다. 다른 앱은 소스의 앱 목록에서 추가할 수 있습니다",
     "warning": "신뢰할 수 있는 제작자의 소스만 추가하세요. 패치 소스는 앱 동작을 변경할 수 있습니다.",
     "open-btn": "Morphe에서 열기",
     "back-home": "홈으로 돌아가기",

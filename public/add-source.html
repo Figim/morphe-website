@@ -17,18 +17,28 @@
 
 <!-- Android state -->
 <div class="container state" id="state-android">
-    <img id="source-icon" class="icon-circle" src="" alt="Source Icon">
-    <h1 data-i18n="add-source.title">Add patch source</h1>
+    <div class="source-avatar">
+        <img id="source-icon" class="source-avatar__image" src="" alt="Source Icon">
+        <span class="source-avatar__mark" id="source-host-mark" aria-hidden="true"></span>
+    </div>
+    <h1 class="source-name" id="source-name"></h1>
+    <div class="source-owner" id="source-owner"></div>
     <p class="hero-description" data-i18n="add-source.subtitle">Do you want to add this patch source to Morphe?</p>
 
-    <div class="source-card">
-        <div class="source-card__label" id="source-label" data-i18n="add-source.source-label">Source</div>
-        <div class="source-card__url" id="source-url"></div>
+    <!-- The header names the source, so only what the link narrows it to is listed -->
+    <div class="item-list" id="app-section" hidden>
+        <div class="item-row">
+            <span class="item-row__leading" id="app-icon"><span class="material-symbols-rounded">apps</span></span>
+            <div class="item-row__text">
+                <div class="item-row__title" id="app-name"></div>
+                <div class="item-row__description" data-i18n="add-source.only-app">Only this app is added. You can add other apps from the source's app list</div>
+            </div>
+        </div>
     </div>
 
-    <div class="warning-box" id="trust-warning" style="display: none;">
+    <div class="warning-line" id="trust-warning" style="display: none;">
         <span class="material-symbols-rounded">warning</span>
-        <span class="warning-box__text" data-i18n="add-source.warning">Only add sources from authors you trust. Patch sources can modify your apps</span>
+        <span data-i18n="add-source.warning">Only add sources from authors you trust. Patch sources can modify your apps</span>
     </div>
 
     <a href="#" class="btn btn-primary" id="btn-open">
@@ -66,6 +76,7 @@
 
     <div class="source-card">
         <div class="source-card__label" data-i18n="add-source.source-label">Source</div>
+        <div class="source-card__title" id="blocked-source-title"></div>
         <div class="source-card__url" id="blocked-source-url"></div>
     </div>
 
