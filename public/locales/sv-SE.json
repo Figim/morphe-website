@@ -289,7 +289,6 @@
   "add-source": {
     "subtitle": "Vill du lägga till den här tilläggskällan i Morphe?",
     "source-label": "Källa",
-    "app-label": "App",
     "only-app": "Endast den här appen läggs till. Du kan lägga till andra appar från källans applista",
     "only-universal": "Endast de universella patcharna läggs till. Du kan lägga till appar från källans applista",
     "warning": "Lägg bara till källor från utgivare du litar på. Tilläggskällor kan modifiera dina appar",

@@ -294,7 +294,6 @@
   "add-source": {
     "subtitle": "是否要将此补丁源添加到 Morphe？",
     "source-label": "来源",
-    "app-label": "应用",
     "only-app": "只添加此应用。你可以从来源的应用列表中添加其他应用",
     "only-universal": "仅添加通用补丁。你可以从来源的应用列表中添加应用",
     "warning": "仅添加来自你信任作者的来源。补丁源可能会修改你的应用",

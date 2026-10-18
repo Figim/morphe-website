@@ -294,7 +294,6 @@
   "add-source": {
     "subtitle": "Deseja adicionar esta fonte de patches ao Morphe?",
     "source-label": "Fonte",
-    "app-label": "App",
     "only-app": "Só este app é adicionado. Você pode adicionar outros apps pela lista de apps da fonte",
     "only-universal": "Apenas os patches universais são adicionados. Você pode adicionar apps pela lista de apps da fonte",
     "warning": "Adicione apenas fontes de autores em quem você confia. Fontes de patches podem modificar seus aplicativos",
