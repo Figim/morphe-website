@@ -294,8 +294,8 @@
   "add-source": {
     "subtitle": "Vuoi aggiungere questa sorgente di patch a Morphe?",
     "source-label": "Sorgente",
-    "app-label": "App",
     "only-app": "Viene aggiunta solo questa app. Puoi aggiungere altre app dall'elenco delle app della sorgente",
+    "only-universal": "Vengono aggiunte solo le patch universali. Puoi aggiungere app dall'elenco delle app della fonte",
     "warning": "Aggiungi solo sorgenti di autori di cui ti fidi. Le sorgenti di patch possono modificare le tue app",
     "open-btn": "Apri in Morphe",
     "back-home": "Torna alla homepage",

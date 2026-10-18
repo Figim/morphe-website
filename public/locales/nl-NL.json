@@ -294,8 +294,8 @@
   "add-source": {
     "subtitle": "Wil je deze patchbron toevoegen aan Morphe?",
     "source-label": "Bron",
-    "app-label": "App",
     "only-app": "Alleen deze app wordt toegevoegd. Andere apps kun je toevoegen via de lijst met apps van de bron",
+    "only-universal": "Alleen de universele patches worden toegevoegd. Je kunt apps toevoegen via de app-lijst van de bron",
     "warning": "Voeg alleen bronnen toe van auteurs die je vertrouwt. Patchbronnen kunnen je apps wijzigen",
     "open-btn": "Openen in Morphe",
     "back-home": "Terug naar startpagina",

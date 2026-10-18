@@ -294,8 +294,8 @@
   "add-source": {
     "subtitle": "¿Quieres agregar esta fuente de parches a Morphe?",
     "source-label": "Fuente",
-    "app-label": "App",
     "only-app": "Solo se añade esta app. Puedes añadir otras apps desde la lista de apps de la fuente",
+    "only-universal": "Solo se añaden los parches universales. Puedes añadir aplicaciones desde la lista de aplicaciones de la fuente",
     "warning": "Agrega solo fuentes de autores en los que confíes. Las fuentes de parches pueden modificar tus aplicaciones",
     "open-btn": "Abrir en Morphe",
     "back-home": "Volver a la página principal",
