@@ -296,6 +296,7 @@
     "source-label": "Fonte",
     "app-label": "Aplicação",
     "only-app": "Só esta aplicação é adicionada. Pode adicionar outras aplicações a partir da lista de aplicações da fonte",
+    "only-universal": "Apenas os patches universais são adicionados. Pode adicionar aplicações a partir da lista de aplicações da fonte",
     "warning": "Adicione apenas fontes de autores em quem confia. As fontes de patches podem modificar as suas aplicações",
     "open-btn": "Abrir no Morphe",
     "back-home": "Voltar à página inicial",

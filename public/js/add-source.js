@@ -33,7 +33,9 @@
     var githubRepo = params.get('github') || '';
     var gitlabRepo = params.get('gitlab') || '';
     var name       = params.get('name') || '';
-    // App the link was opened for, by package and by name. Manager adds the source for it alone
+    // App the link was opened for, by package and by name. Manager adds the source for it alone,
+    // or for its universal patches alone when the bundles site passes UNIVERSAL_APP in its place
+    var UNIVERSAL_APP = '__universal__';
     var appPackage = params.get('app') || '';
     var appName    = params.get('appName') || '';
     var appIcon    = params.get('appIcon') || '';
@@ -112,7 +114,13 @@
     var blockedUrlEl = document.getElementById('blocked-source-url');
     if (blockedUrlEl) blockedUrlEl.textContent = url.replace(/^https?:\/\//, '');
 
-    if (appPackage) {
+    if (appPackage === UNIVERSAL_APP) {
+        document.getElementById('app-name').textContent = appName || 'Universal patches';
+        document.getElementById('only-app').hidden = true;
+        document.getElementById('only-universal').hidden = false;
+        document.querySelector('#app-icon .material-symbols-rounded').textContent = 'public';
+        document.getElementById('app-section').hidden = false;
+    } else if (appPackage) {
         document.getElementById('app-name').textContent = appName || appPackage;
         document.getElementById('app-section').hidden = false;
         showAppIcon(appIcon);

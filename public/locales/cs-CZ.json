@@ -296,6 +296,7 @@
     "source-label": "Zdroj",
     "app-label": "Aplikace",
     "only-app": "Přidá se jen tato aplikace. Další aplikace můžete přidat ze seznamu aplikací zdroje",
+    "only-universal": "Přidají se jen univerzální patche. Aplikace můžeš přidat ze seznamu aplikací zdroje",
     "warning": "Přidávejte pouze zdroje od autorů, kterým důvěřujete. Zdroje patchů mohou upravovat vaše aplikace",
     "open-btn": "Otevřít v Morphe",
     "back-home": "Zpět na hlavní stránku",

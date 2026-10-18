@@ -296,6 +296,7 @@
     "source-label": "Kaynak",
     "app-label": "Uygulama",
     "only-app": "Yalnızca bu uygulama eklenir. Diğer uygulamaları kaynağın uygulama listesinden ekleyebilirsiniz",
+    "only-universal": "Yalnızca evrensel yamalar eklenir. Uygulamaları kaynağın uygulama listesinden ekleyebilirsiniz",
     "warning": "Yalnızca güvendiğiniz yazarlardan gelen kaynakları ekleyin. Yama kaynakları uygulamalarınızı değiştirebilir",
     "open-btn": "Morphe'de aç",
     "back-home": "Ana sayfaya dön",

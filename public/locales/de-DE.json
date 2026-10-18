@@ -296,6 +296,7 @@
     "source-label": "Quelle",
     "app-label": "App",
     "only-app": "Nur diese App wird hinzugefügt. Weitere Apps kannst du über die App-Liste der Quelle hinzufügen",
+    "only-universal": "Nur die universellen Patches werden hinzugefügt. Apps kannst du über die App-Liste der Quelle hinzufügen",
     "warning": "Fügen Sie nur Quellen von Autoren hinzu, denen Sie vertrauen. Patch-Quellen können Ihre Apps verändern",
     "open-btn": "In Morphe öffnen",
     "back-home": "Zur Startseite",
