@@ -1,13 +1,33 @@
 (function() {
+  'use strict';
+
   const WEBSITE_ID = 'cd26cb28-0b3a-4524-be50-f7f69e46fcec';
 
+  // --- Umami Analytics ---
   const analytics = document.createElement('script');
   analytics.defer = true;
   analytics.src = 'https://analytics.morphe.software/script.js';
   analytics.setAttribute('data-website-id', WEBSITE_ID);
   analytics.setAttribute('data-performance', 'true');
+  analytics.onerror = function() {};
   document.head.appendChild(analytics);
 
+  // --- Safety Fallback: Ensure links navigate even if Umami server is down or hanging ---
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[data-umami-event]');
+    if (!link || !link.href || link.target === '_blank') return;
+
+    const targetUrl = link.href;
+
+    // If Umami gets stuck on an offline server and doesn't navigate within 150ms, force navigation
+    setTimeout(function() {
+      if (window.location.href !== targetUrl) {
+        window.location.href = targetUrl;
+      }
+    }, 150);
+  }, true);
+
+  // --- Session Replay ---
   const RECORDER_SAMPLING_RATES = {
     'microg': 0,
     'add-source': 0,
@@ -33,6 +53,7 @@
       recorder.setAttribute('data-sample-rate', currentSampleRate.toString());
       recorder.setAttribute('data-mask-level', 'moderate');
       recorder.setAttribute('data-max-duration', '300000');
+      recorder.onerror = function() {};
       document.head.appendChild(recorder);
     }, 3000);
   }
@@ -45,6 +66,7 @@
   const gaScript = document.createElement('script');
   gaScript.async = true;
   gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-1BRTT4J6ML';
+  gaScript.onerror = function() {};
   gaScript.onload = function() {
     // --- Set consent for cookieless analytics ---
     gtag('consent', 'default', {
