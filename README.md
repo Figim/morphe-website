@@ -24,6 +24,6 @@ for [Morphe.software](https://morphe.software)
 Thank you for considering contributing to Morphe website.
 You can find the contribution guidelines [here](CONTRIBUTING.md).
 
-## 📜 Licence
+## 📜 License
 
 Copyright Morphe. This repository is copyrighted and _not_ licensed under open source terms. 
