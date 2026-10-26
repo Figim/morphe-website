@@ -51,6 +51,15 @@
 
     var repoOwner = repo.split('/')[0];
 
+    function getTrackingData() {
+        var data = {
+            repo: repo.toLowerCase(),
+            provider: isGitLab ? 'gitlab' : 'github'
+        };
+        if (appPackage) data.app = appPackage;
+        return data;
+    }
+
     // Set source icon
     var iconImg = document.getElementById('source-icon');
     if (iconImg) {
@@ -71,10 +80,7 @@
 
     window.addEventListener('load', function () {
         if (window.umami) {
-            umami.track('Add Source', {
-                user: repoOwner,
-                provider: isGitLab ? 'gitlab' : 'github'
-            });
+            umami.track('Add Source', getTrackingData());
         }
     });
 
@@ -221,11 +227,17 @@
         });
     }
 
+    // Both i18nReady and the fallback timer can call this. Re-rendering is fine,
+    // but listeners and analytics events must only be added once.
+    var stateRendered = false;
+
     function renderState(isBlocked, reason, updatedAt) {
-        if (window.umami && isBlocked) {
+        var isFirstRender = !stateRendered;
+        stateRendered = true;
+
+        if (window.umami && isBlocked && isFirstRender) {
             umami.track('Add Source Blocked', {
-                user: repoOwner,
-                repo: providerKey,
+                repo: repo.toLowerCase(),
                 reason: reason || 'unspecified'
             });
         }
@@ -236,7 +248,7 @@
         } else if (isDevelopment) {
             show('state-development');
             var btnDevBack = document.getElementById('btn-dev-back');
-            if (btnDevBack) {
+            if (btnDevBack && isFirstRender) {
                 btnDevBack.addEventListener('click', function (e) {
                     if (window.history.length > 1) {
                         e.preventDefault();
@@ -246,11 +258,16 @@
             }
         } else if (isAndroid) {
             show('state-android');
-            document.getElementById('btn-open').addEventListener('click', function (e) {
-                e.preventDefault();
-                show('state-success');
-                window.location.href = intentLink;
-            });
+            if (isFirstRender) {
+                document.getElementById('btn-open').addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // 'Add Source' counts page views, including people who back out.
+                    // This counts people who actually sent the source to Manager.
+                    if (window.umami) umami.track('Add Source Open', getTrackingData());
+                    show('state-success');
+                    window.location.href = intentLink;
+                });
+            }
         } else {
             show('state-desktop');
             renderDesktopQrCode();
