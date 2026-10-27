@@ -78,7 +78,7 @@ jobs:
           DOWNLOAD_URL="https://github.com/MorpheApp/morphe-manager/releases/download/v$VERSION/morphe-manager-$VERSION.apk"
           
           # Update index.html with the download link
-          sed -i "s|DOWNLOAD_URL_TEMPLATE|$DOWNLOAD_URL|g" public/index.html
+          sed -i "s|MANAGER_DOWNLOAD_URL_TEMPLATE|$DOWNLOAD_URL|g" public/index.html
           echo "Updated index.html with Morphe Manager download link."
 
       - name: Fetch and Update Morphe Desktop Download Link
