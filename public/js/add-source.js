@@ -162,6 +162,37 @@
         '#Intent;scheme=https;package=app.morphe.manager;S.browser_fallback_url=' +
         encodeURIComponent('https://morphe.software/') + ';end';
 
+    // Page that linked here, such as a bundle listing. After the source is sent to Manager
+    // the success state offers to return there instead of the homepage.
+    var referrerUrl = (function () {
+        if (!document.referrer) return null;
+        try {
+            var ref = new URL(document.referrer);
+            if (ref.protocol !== 'https:' && ref.protocol !== 'http:') return null;
+            if (ref.origin === window.location.origin && ref.pathname === window.location.pathname) return null;
+            return ref.href;
+        } catch (e) {
+            console.warn('Ignoring invalid referrer', document.referrer, e);
+            return null;
+        }
+    })();
+
+    var btnSuccessBack = document.getElementById('btn-success-back');
+    if (btnSuccessBack && referrerUrl) {
+        btnSuccessBack.href = referrerUrl;
+        btnSuccessBack.setAttribute('data-i18n', 'add-source.go-back');
+        // Translated with the rest of the page once i18n loads
+        btnSuccessBack.textContent = 'Go back';
+        btnSuccessBack.addEventListener('click', function (e) {
+            // A cross-origin referrer is usually trimmed to its origin, so going back
+            // in history returns to the exact page when possible.
+            if (window.history.length > 1) {
+                e.preventDefault();
+                window.history.back();
+            }
+        });
+    }
+
     function show(id) {
         document.querySelectorAll('.state').forEach(function (s) {
             s.classList.remove('active');
