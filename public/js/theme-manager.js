@@ -26,6 +26,7 @@
             this.mediaQuery.addEventListener('change', () => {
                 if (!localStorage.getItem(THEME_KEY)) {
                     const systemTheme = this.getSystemTheme();
+                    this.currentTheme = systemTheme;
                     this.applyTheme(systemTheme);
                 }
             });
@@ -40,7 +41,11 @@
         }
 
         saveTheme(theme) {
-            localStorage.setItem(THEME_KEY, theme);
+            if (theme === this.getSystemTheme()) {
+                localStorage.removeItem(THEME_KEY);
+            } else {
+                localStorage.setItem(THEME_KEY, theme);
+            }
         }
 
         getSystemTheme() {
@@ -58,7 +63,7 @@
                 : THEMES.DARK;
 
             this.currentTheme = next;
-            localStorage.setItem(THEME_KEY, next);
+            this.saveTheme(next);
             this.applyTheme(next);
         }
 
